@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IContext {
++ {abstract} Copy() : void
++ {abstract} Paste() : void
++ {abstract} Cut() : void
++ {abstract} Delete() : void
+}
+
+IContext <|.. TextContext
+class TextContext {
++ text : string
+
++ TextContext()
++ TextContext(text : string)
+
++ Copy() : void
++ Paste() : void
++ Cut() : void
++ Delete() : void
+}
+
+interface IFile {
++ {abstract} Open(path : string) : bool
++ {abstract} Create(path : string) : bool
++ {abstract} Save() : bool
++ {abstract} SaveAs(path : string) : bool
++ {abstract} Close() : bool
+}
+
+IContext <--* Editor
+IFile <|.. Editor
+class Editor {
+- context : IContext
+- path : string
+
++ Editor()
+
++ Open(path : string) : bool
++ Create(path : string) : bool
++ Save() : bool
++ SaveAs(path : string) : bool
++ Close() : bool
+}
+
+@enduml
